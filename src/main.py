@@ -1,7 +1,7 @@
 import mysql.connector
 
 banco = mysql.connector.connect(
-    host="10.30.29.183",
+    host="10.30.29.100",
     port=3309,
     user="root",
     password="root123",
@@ -11,6 +11,7 @@ banco = mysql.connector.connect(
 cursor = banco.cursor()
 
 cursor.execute("CREATE DATABASE IF NOT EXISTS anaclara_klycia")
+
 
 # cursor.execute("CREATE TABLE USUARIO(id INT, username VARCHAR(255), email VARCHAR(50), senha VARCHAR(100), idade INT)")
 id_INT = int(input("id"))
@@ -27,3 +28,12 @@ dados = cursor.fetchall()
 # 5. Mostrar os dados
 for linha in dados:
     print(linha)
+
+user_id = int(input("Digite seu usuario"))
+sql = "DELETE FROM USUARIO WHERE id = %s"
+valores = (user_id,)
+
+cursor.execute(sql, valores)
+banco.commit()
+
+
